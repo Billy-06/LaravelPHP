@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand {{ request()->routeIs('default') ? 'btn-primary active' : ''  }}" href="{{ route("default") }}">LaravelPHP</a>
+            <a class="navbar-brand {{ request()->routeIs('default') ? 'btn-primary active text-white' : ''  }}" href="{{ route("default") }}">LaravelPHP</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,23 +24,23 @@
                 <ul class="navbar-nav">
                     {{-- Home URL --}}
                     <li class="nav-item">
-                        <a class="btn nav-link me-2 {{ request()->routeIs('home') ? 'btn-primary active' : '' }}" href="{{ route('home') }}">Home</a>
+                        <a class="btn nav-link me-2 {{ request()->routeIs('home') ? 'btn-primary active text-white' : '' }}" href="{{ route('home') }}">Home</a>
                     </li>
                     {{-- Products --}}
                     <li class="nav-item">
-                        <a class="btn nav-link me-2 {{ request()->routeIs('products') ? 'btn-primary active' : ''  }}" href="{{ route('products') }}">Products</a>
+                        <a class="btn nav-link me-2 {{ request()->routeIs('products') ? 'btn-primary active text-white' : ''  }}" href="{{ route('products') }}">Products</a>
                     </li>
                     {{-- All Posts --}}
                     <li class="nav-item">
-                        <a class="btn nav-link me-2 {{ request()->routeIs('posts.store') ? 'btn-primary active' : ''  }}" href="{{ route('posts.store') }}">Posts</a>
+                        <a class="btn nav-link me-2 {{ request()->routeIs('posts') ? 'btn-primary active text-white' : ''  }}" href="{{ route('posts.store') }}">Posts</a>
                     </li>
                     {{-- New Post --}}
                     <li class="nav-item">
-                        <a class="btn nav-link me-2 {{ request()->routeIs('posts.create') ? 'btn-primary active' : ''  }}" href="{{ route('posts.create') }}">Create Post</a>
+                        <a class="btn nav-link me-2 {{ request()->routeIs('posts.create') ? 'btn-primary active text-white' : ''  }}" href="{{ route('posts.create') }}">Create Post</a>
                     </li>
                     {{-- About --}}
                     <li class="nav-item">
-                        <a class="btn nav-link me-2 {{ request()->routeIs('about') ? 'btn-primary active' : ''  }}" href="{{ route('about') }}">About</a>
+                        <a class="btn nav-link me-2 {{ request()->routeIs('about') ? 'btn-primary active text-white' : ''  }}" href="{{ route('about') }}">About</a>
                     </li>
                 </ul>
             </div>

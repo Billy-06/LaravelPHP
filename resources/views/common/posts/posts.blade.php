@@ -7,7 +7,23 @@
 <h1 class="text-center">My Posts</h1>
 <div class="container">
     <div class="row">
-        posts go here
+        
+        @forelse ( $posts as $post )
+        <div class="card mb-3 p-0">
+            <div class="card-header">
+                {{ $post->created_at }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ $post->title }}</h5>
+                <p class="card-text">{{ $post->content }}</p>
+                <a href="#" class="btn btn-primary justify-content-end">Go somewhere</a>
+            </div>
+        </div>
+        @empty
+        <div>
+        <p>No posts available yet</p>    
+        </div>   
+        @endforelse
     </div>
 </div>
 
