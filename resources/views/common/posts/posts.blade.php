@@ -16,7 +16,9 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <p class="card-text">{{ $post->content }}</p>
-                <a href="#" class="btn btn-primary justify-content-end">Go somewhere</a>
+            </div>
+            <div class="d-flex justify-content-end p-3">
+                <a href="{{ route('posts.details', $post->id) }}" class="btn btn-primary justify-content-end">View Post</a>
             </div>
         </div>
         @empty

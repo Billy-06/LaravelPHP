@@ -20,4 +20,7 @@ Route::resource('/products', ProductsController::class)
 Route::resource('/posts', PostsController::class)
     ->name('store', 'posts.store')
     ->name('create', 'posts.create')
-    ->name('index', 'posts');
+    ->name('index', 'posts')
+    ->name('show', 'posts.details')
+    ->name('edit', 'posts.edits')
+    ->name('destroy', 'posts.delete');

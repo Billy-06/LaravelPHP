@@ -38,7 +38,7 @@ class PostsController extends Controller
         $post->content = $request->input('content');
         $post->save();
         
-        return redirect()->route('posts.create')->with('success', 'Post submitted Title: ' . $post->title . 'Content: ' . $post->content );
+        return redirect()->route('posts.details', $post->id)->with('success', 'Post submitted Title: ' . $post->title . 'Content: ' . $post->content );
     }
 
     /**
@@ -46,7 +46,9 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return view("common.posts.details", ['post' => $post]);
     }
 
     /**
@@ -54,7 +56,9 @@ class PostsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return view("common.posts.edit", ["post" => $post]);
     }
 
     /**
@@ -62,7 +66,20 @@ class PostsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'content'=>['required','min:10']
+        ]);
+
+        $post = Post::findOrFail($id);
+
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+
+        $post->save();
+
+        return redirect()->route("posts.details", $post->id)
+        ->with('success', 'Title Update: ' . $post->title . ' Content: ' . $post->content);
     }
 
     /**
@@ -70,6 +87,11 @@ class PostsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $previous = $post->title;
+        $post->delete();
+
+        return redirect()->route('posts.store')
+        ->with('success', "Deleted Post with title: " . $previous);
     }
 }
