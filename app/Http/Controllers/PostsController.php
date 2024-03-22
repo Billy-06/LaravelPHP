@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -26,14 +28,13 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => ['required','min:10']
-        ]);
+        // Mass assignement with specified mass-assignable fields
+        $validated_data = $request->validated();
 
-        $post = new Post();
+        $post = $request->user()->posts()->create($validated_data);
+
         $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->save();
@@ -57,6 +58,7 @@ class PostsController extends Controller
     public function edit(string $id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize("update", $post);
 
         return view("common.posts.edit", ["post" => $post]);
     }
@@ -64,20 +66,16 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostRequest $request, string $id)
     {
-        $request->validate([
-            'title'=>'required',
-            'content'=>['required','min:10']
-        ]);
-
+        
         $post = Post::findOrFail($id);
+        $this->authorize("update", $post);
 
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
+        $validated_data = $request->validated();
 
-        $post->save();
-
+        $post->update($validated_data);
+        
         return redirect()->route("posts.details", $post->id)
         ->with('success', 'Title Update: ' . $post->title . ' Content: ' . $post->content);
     }
@@ -88,6 +86,7 @@ class PostsController extends Controller
     public function destroy(string $id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize("delete", $post);
         $previous = $post->title;
         $post->delete();
 

@@ -17,7 +17,8 @@
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <p class="card-text">{{ $post->content }}</p>
             </div>
-            <div class="d-flex justify-content-end p-3">
+            <div class="card-footer d-flex justify-content-between p-3">
+                <p class="card-text">Created by: {{ $post->user->name }}</p>
                 <a href="{{ route('posts.details', $post->id) }}" class="btn btn-primary justify-content-end">View Post</a>
             </div>
         </div>
